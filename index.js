@@ -37,10 +37,9 @@ do {
         case 4:
           break
 
-        default:
+        default: console.log('line undefined')
           break
       }
     })
-    rl.close()
   })
 } while (false)
