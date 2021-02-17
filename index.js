@@ -3,10 +3,10 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 })
-let line1 = [' ', ' ', ' ', '|', ' ', ' ', ' ']
-let line2 = [' ', ' ', '|', '|', '|', ' ', ' ']
-let line3 = [' ', '|', '|', '|', '|', '|', ' ']
-let line4 = ['|', '|', '|', '|', '|', '|', '|']
+const line1 = [' ', ' ', ' ', '|', ' ', ' ', ' ']
+const line2 = [' ', ' ', '|', '|', '|', ' ', ' ']
+const line3 = [' ', '|', '|', '|', '|', '|', ' ']
+const line4 = ['|', '|', '|', '|', '|', '|', '|']
 
 do {
   console.log('* * * * * * * * ')
@@ -15,27 +15,30 @@ do {
   console.log(`*${line3[0]} ${line3[1]} ${line3[2]} ${line3[3]} ${line3[4]} ${line3[5]} ${line3[6]}*`)
   console.log(`*${line4[0]} ${line4[1]} ${line4[2]} ${line4[3]} ${line4[4]} ${line4[5]} ${line4[6]}*`)
   console.log('* * * * * * * * ')
-  
+
   console.log('Your turn :')
   rl.question('Line :', (argline) => {
     rl.question('match :', (argmatch) => {
       console.log(`Player removed ${argmatch} match(es) from line ${argline}`)
-      switch (key) {
+      switch (argline) {
         case 1:
-          
-          break;
+          for (let index = 0; index < argmatch; index++) {
+            const finder = line1.findIndex(element => element = '|')
+            line1[finder] = ' '
+          }
+          break
 
         case 2:
-          break;
+          break
 
         case 3:
-          break;
+          break
 
         case 4:
-          break;
-      
+          break
+
         default:
-          break;
+          break
       }
     })
     rl.close()
