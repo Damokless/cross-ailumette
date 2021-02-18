@@ -5,10 +5,10 @@ const rl = readline.createInterface({
 })
 
 let lastPlayer = ''
-const line1 = [' ', ' ', ' ', '|', ' ', ' ', ' ']
-const line2 = [' ', ' ', '|', '|', '|', ' ', ' ']
-const line3 = [' ', '|', '|', '|', '|', '|', ' ']
-const line4 = ['|', '|', '|', '|', '|', '|', '|']
+let line1 = [' ', ' ', ' ', '|', ' ', ' ', ' ']
+let line2 = [' ', ' ', '|', '|', '|', ' ', ' ']
+let line3 = [' ', '|', '|', '|', '|', '|', ' ']
+let line4 = ['|', '|', '|', '|', '|', '|', '|']
 
 const recursiveAsyncReadLine = function (line1, line2, line3, line4) {
   console.log('* * * * * * * * ')
@@ -132,53 +132,66 @@ recursiveAsyncReadLine(line1, line2, line3, line4) // we have to actually start 
 
 async function iaTurns (line1, line2, line3, line4) {
   const randomLine = Math.floor(Math.random() * (5 - 1)) + 1
-  switch (randomLine) {
-    case 1:
-
-      break
-
-    default:
-      break
-  }
   const randomMatch = Math.floor(Math.random() * (8 - 1)) + 1
-  console.log("AI's turn ...")
-
+  let results = ''
   switch (randomLine) {
     case 1:
-      lastPlayer = 'AI'
-      for (let index = 0; index < randomMatch; index++) {
-        const finder = line1.indexOf('|')
-        line1[finder] = ' '
+      results = line1.filter(x => x.includes('|'))
+      if (randomMatch >= results) {
+        iaTurns(line1, line2, line3, line4)
+      } else {
+        console.log('AI’s turn...')
+        console.log(`AI removed ${randomMatch} match(es) from line ${randomLine}`)
+        lastPlayer = 'AI'
+        for (let index = 0; index < randomMatch; index++) {
+          const finder = line1.indexOf('|')
+          line1[finder] = ' '
+        }
+        recursiveAsyncReadLine(line1, line2, line3, line4)
       }
-      recursiveAsyncReadLine(line1, line2, line3, line4)
       break
     case 2:
-      lastPlayer = 'AI'
-      for (let index = 0; index < randomMatch; index++) {
-        const finder = line2.indexOf('|')
-        line2[finder] = ' '
+      results = line2.filter(x => x.includes('|'))
+      if (randomMatch >= results) {
+        iaTurns(line1, line2, line3, line4)
+      } else {
+        console.log('AI’s turn...')
+        console.log(`AI removed ${randomMatch} match(es) from line ${randomLine}`)
+        lastPlayer = 'AI'
+        for (let index = 0; index < randomMatch; index++) {
+          const finder = line2.indexOf('|')
+          line2[finder] = ' '
+        }
+        recursiveAsyncReadLine(line1, line2, line3, line4)
       }
-      recursiveAsyncReadLine(line1, line2, line3, line4)
       break
     case 3:
-      lastPlayer = 'AI'
-      for (let index = 0; index < randomMatch; index++) {
-        const finder = line3.indexOf('|')
-        line3[finder] = ' '
+      results = line3.filter(x => x.includes('|'))
+      if (randomMatch >= results) {
+        iaTurns(line1, line2, line3, line4)
+      } else {
+        console.log('AI’s turn...')
+        console.log(`AI removed ${randomMatch} match(es) from line ${randomLine}`)
+        lastPlayer = 'AI'
+        for (let index = 0; index < randomMatch; index++) {
+          const finder = line3.indexOf('|')
+          line3[finder] = ' '
+        }
+        recursiveAsyncReadLine(line1, line2, line3, line4)
       }
-      recursiveAsyncReadLine(line1, line2, line3, line4)
       break
     case 4:
-      lastPlayer = 'AI'
-      for (let index = 0; index < randomMatch; index++) {
-        const finder = line1.indexOf('|')
-        line1[finder] = ' '
+      results = line4.filter(x => x.includes('|'))
+      if (randomMatch >= results) {
+        iaTurns(line1, line2, line3, line4)
+      } else {
+        lastPlayer = 'AI'
+        for (let index = 0; index < randomMatch; index++) {
+          const finder = line4.indexOf('|')
+          line4[finder] = ' '
+        }
+        recursiveAsyncReadLine(line1, line2, line3, line4)
       }
-      recursiveAsyncReadLine(line1, line2, line3, line4)
-      break
-
-    default:
-      console.log('Line undefined')
       break
   }
 }
