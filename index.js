@@ -50,7 +50,7 @@ const recursiveAsyncReadLine = function (line1, line2, line3, line4) {
             `*${line4[0]} ${line4[1]} ${line4[2]} ${line4[3]} ${line4[4]} ${line4[5]} ${line4[6]}*`
           )
           console.log('* * * * * * * * ')
-
+          gameStatus(line1, line2, line3, line4, lastPlayer)
           iaTurns(line1, line2, line3, line4)
           break
 
@@ -74,6 +74,7 @@ const recursiveAsyncReadLine = function (line1, line2, line3, line4) {
             `*${line4[0]} ${line4[1]} ${line4[2]} ${line4[3]} ${line4[4]} ${line4[5]} ${line4[6]}*`
           )
           console.log('* * * * * * * * ')
+          gameStatus(line1, line2, line3, line4, lastPlayer)
           iaTurns(line1, line2, line3, line4)
           break
 
@@ -97,6 +98,7 @@ const recursiveAsyncReadLine = function (line1, line2, line3, line4) {
             `*${line4[0]} ${line4[1]} ${line4[2]} ${line4[3]} ${line4[4]} ${line4[5]} ${line4[6]}*`
           )
           console.log('* * * * * * * * ')
+          gameStatus(line1, line2, line3, line4, lastPlayer)
           iaTurns(line1, line2, line3, line4)
           break
 
@@ -120,6 +122,7 @@ const recursiveAsyncReadLine = function (line1, line2, line3, line4) {
             `*${line4[0]} ${line4[1]} ${line4[2]} ${line4[3]} ${line4[4]} ${line4[5]} ${line4[6]}*`
           )
           console.log('* * * * * * * * ')
+          gameStatus(line1, line2, line3, line4, lastPlayer)
           iaTurns(line1, line2, line3, line4)
           break
 
@@ -151,6 +154,7 @@ async function iaTurns (line1, line2, line3, line4) {
           const finder = line1.indexOf('|')
           line1[finder] = ' '
         }
+        gameStatus(line1, line2, line3, line4, lastPlayer)
         recursiveAsyncReadLine(line1, line2, line3, line4)
       }
       break
@@ -166,6 +170,7 @@ async function iaTurns (line1, line2, line3, line4) {
           const finder = line2.indexOf('|')
           line2[finder] = ' '
         }
+        gameStatus(line1, line2, line3, line4, lastPlayer)
         recursiveAsyncReadLine(line1, line2, line3, line4)
       }
       break
@@ -181,6 +186,7 @@ async function iaTurns (line1, line2, line3, line4) {
           const finder = line3.indexOf('|')
           line3[finder] = ' '
         }
+        gameStatus(line1, line2, line3, line4, lastPlayer)
         recursiveAsyncReadLine(line1, line2, line3, line4)
       }
       break
@@ -196,8 +202,27 @@ async function iaTurns (line1, line2, line3, line4) {
           const finder = line4.indexOf('|')
           line4[finder] = ' '
         }
+        gameStatus(line1, line2, line3, line4, lastPlayer)
         recursiveAsyncReadLine(line1, line2, line3, line4)
       }
       break
+  }
+}
+
+async function gameStatus (line1, line2, line3, line4, lastPlayer) {
+  const check1 = line1.filter(x => x.includes('|'))
+  const check2 = line2.filter(x => x.includes('|'))
+  const check3 = line3.filter(x => x.includes('|'))
+  const check4 = line4.filter(x => x.includes('|'))
+  if (check1.length !== 0 || check2.length !== 0 || check3.length !== 0 || check4.length !== 0) {
+    return null
+  } else {
+    if (lastPlayer === 'Player') {
+      console.log('You lost, too bad..')
+      rl.close()
+    } else {
+      console.log('I lost.. snif.. but I’ll get you next time!!')
+      rl.close()
+    }
   }
 }
