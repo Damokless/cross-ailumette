@@ -5,72 +5,82 @@ const rl = readline.createInterface({
 })
 
 let lastPlayer = ''
-let line1 = [' ', ' ', ' ', '|', ' ', ' ', ' ']
-let line2 = [' ', ' ', '|', '|', '|', ' ', ' ']
-let line3 = [' ', '|', '|', '|', '|', '|', ' ']
-let line4 = ['|', '|', '|', '|', '|', '|', '|']
+const line1 = [' ', ' ', ' ', '|', ' ', ' ', ' ']
+const line2 = [' ', ' ', '|', '|', '|', ' ', ' ']
+const line3 = [' ', '|', '|', '|', '|', '|', ' ']
+const line4 = ['|', '|', '|', '|', '|', '|', '|']
 
-const recursiveAsyncReadLine = function (line1, line2, line3, line4) {
+const playerTurns = function (line1, line2, line3, line4) {
   displayGame(line1, line2, line3, line4)
   console.log('Your turn :')
   rl.question('Line :', (argline) => {
-    rl.question('match :', (argmatch) => {
-      switch (argline) {
-        case '1':
-          lastPlayer = 'Player'
-          for (let index = 0; index < argmatch; index++) {
-            const finder = line1.indexOf('|')
-            line1[finder] = ' '
-          }
-          lastPlayer = 'Player'
-          displayGame(line1, line2, line3, line4)
-          gameStatus(line1, line2, line3, line4, lastPlayer)
-          iaTurns(line1, line2, line3, line4)
-          break
+    const code = argline.charCodeAt()
+    if (argline < 1 || argline > 4 || code < 49 || code > 52) {
+      console.log('Error: invalid input (positive number expected and between 1 and 4)')
+      playerTurns(line1, line2, line3, line4)
+    } else {
+      rl.question('match :', (argmatch) => {
+        if (argmatch < 1 || argmatch > 7 || code < 49 || code > 52) {
+          console.log('Error: invalid input (positive number expected and between 1 and 4)')
+          playerTurns(line1, line2, line3, line4)
+        } else {
+          switch (argline) {
+            case '1':
+              lastPlayer = 'Player'
+              for (let index = 0; index < argmatch; index++) {
+                const finder = line1.indexOf('|')
+                line1[finder] = ' '
+              }
+              lastPlayer = 'Player'
+              displayGame(line1, line2, line3, line4)
+              gameStatus(line1, line2, line3, line4, lastPlayer)
+              iaTurns(line1, line2, line3, line4)
+              break
 
-        case '2':
-          for (let index = 0; index < argmatch; index++) {
-            const finder = line2.indexOf('|')
-            line2[finder] = ' '
-          }
-          lastPlayer = 'Player'
-          displayGame(line1, line2, line3, line4)
-          gameStatus(line1, line2, line3, line4, lastPlayer)
-          iaTurns(line1, line2, line3, line4)
-          break
+            case '2':
+              for (let index = 0; index < argmatch; index++) {
+                const finder = line2.indexOf('|')
+                line2[finder] = ' '
+              }
+              lastPlayer = 'Player'
+              displayGame(line1, line2, line3, line4)
+              gameStatus(line1, line2, line3, line4, lastPlayer)
+              iaTurns(line1, line2, line3, line4)
+              break
 
-        case '3':
-          for (let index = 0; index < argmatch; index++) {
-            const finder = line3.indexOf('|')
-            line3[finder] = ' '
-          }
-          lastPlayer = 'Player'
-          displayGame(line1, line2, line3, line4)
-          gameStatus(line1, line2, line3, line4, lastPlayer)
-          iaTurns(line1, line2, line3, line4)
-          break
+            case '3':
+              for (let index = 0; index < argmatch; index++) {
+                const finder = line3.indexOf('|')
+                line3[finder] = ' '
+              }
+              lastPlayer = 'Player'
+              displayGame(line1, line2, line3, line4)
+              gameStatus(line1, line2, line3, line4, lastPlayer)
+              iaTurns(line1, line2, line3, line4)
+              break
 
-        case '4':
-          for (let index = 0; index < argmatch; index++) {
-            const finder = line4.indexOf('|')
-            line4[finder] = ' '
-          }
-          lastPlayer = 'Player'
-          displayGame(line1, line2, line3, line4)
-          gameStatus(line1, line2, line3, line4, lastPlayer)
-          iaTurns(line1, line2, line3, line4)
-          break
+            case '4':
+              for (let index = 0; index < argmatch; index++) {
+                const finder = line4.indexOf('|')
+                line4[finder] = ' '
+              }
+              lastPlayer = 'Player'
+              displayGame(line1, line2, line3, line4)
+              gameStatus(line1, line2, line3, line4, lastPlayer)
+              iaTurns(line1, line2, line3, line4)
+              break
 
-        default:
-          console.log('line undefined')
-          break
-      }
-      rl.resume()
-    })
+            default:
+              console.log('line undefined')
+              break
+          }
+        }
+      })
+    }
   })
 }
 
-recursiveAsyncReadLine(line1, line2, line3, line4) // we have to actually start our recursion somehow
+playerTurns(line1, line2, line3, line4) // we have to actually start our recursion somehow
 
 async function iaTurns (line1, line2, line3, line4) {
   const randomLine = Math.floor(Math.random() * (5 - 1)) + 1
@@ -90,7 +100,7 @@ async function iaTurns (line1, line2, line3, line4) {
           line1[finder] = ' '
         }
         gameStatus(line1, line2, line3, line4, lastPlayer)
-        recursiveAsyncReadLine(line1, line2, line3, line4)
+        playerTurns(line1, line2, line3, line4)
       }
       break
     case 2:
@@ -106,7 +116,7 @@ async function iaTurns (line1, line2, line3, line4) {
           line2[finder] = ' '
         }
         gameStatus(line1, line2, line3, line4, lastPlayer)
-        recursiveAsyncReadLine(line1, line2, line3, line4)
+        playerTurns(line1, line2, line3, line4)
       }
       break
     case 3:
@@ -122,7 +132,7 @@ async function iaTurns (line1, line2, line3, line4) {
           line3[finder] = ' '
         }
         gameStatus(line1, line2, line3, line4, lastPlayer)
-        recursiveAsyncReadLine(line1, line2, line3, line4)
+        playerTurns(line1, line2, line3, line4)
       }
       break
     case 4:
@@ -138,7 +148,7 @@ async function iaTurns (line1, line2, line3, line4) {
           line4[finder] = ' '
         }
         gameStatus(line1, line2, line3, line4, lastPlayer)
-        recursiveAsyncReadLine(line1, line2, line3, line4)
+        playerTurns(line1, line2, line3, line4)
       }
       break
   }
@@ -163,7 +173,7 @@ function gameStatus (line1, line2, line3, line4, lastPlayer) {
   }
 }
 
-function displayGame(line1, line2, line3, line4) {
+function displayGame (line1, line2, line3, line4) {
   console.log('* * * * * * * * ')
   console.log(`*${line1[0]} ${line1[1]} ${line1[2]} ${line1[3]} ${line1[4]} ${line1[5]} ${line1[6]}*`)
   console.log(`*${line2[0]} ${line2[1]} ${line2[2]} ${line2[3]} ${line2[4]} ${line2[5]} ${line2[6]}*`)
