@@ -21,7 +21,7 @@ const playerTurns = function (line1, line2, line3, line4) {
     } else {
       rl.question('match :', (argmatch) => {
         if (argmatch < 1 || argmatch > 7 || code < 49 || code > 52) {
-          console.log('Error: invalid input (positive number expected and between 1 and 4)')
+          console.log('Error: invalid input (positive number expected and between 1 and 7)')
           playerTurns(line1, line2, line3, line4)
         } else {
           switch (argline) {

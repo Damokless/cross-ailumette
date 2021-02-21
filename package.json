@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Damokless/cross-ailumette#readme",
   "devDependencies": {
+    "electron": "^11.3.0",
     "eslint": "^7.20.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
