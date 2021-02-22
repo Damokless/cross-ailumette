@@ -2,10 +2,10 @@
   "name": "cross-ailumette",
   "version": "1.0.0",
   "description": "cross-ailumette",
-  "main": "electron electron.js",
+  "main": "electron.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "npx electron ."
   },
   "repository": {
     "type": "git",
