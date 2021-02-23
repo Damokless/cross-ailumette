@@ -6,6 +6,13 @@ const line2 = [' ', ' ', '|', '|', '|', ' ', ' ']
 const line3 = [' ', '|', '|', '|', '|', '|', ' ']
 const line4 = ['|', '|', '|', '|', '|', '|', '|']
 
+function getValue (a, b) {
+  const argline = a
+  const argmatch = b
+
+  playerTurns(argline, argmatch)
+}
+
 const playerTurns = function (line1, line2, line3, line4, argline, argmatch) {
   console.log(argline)
   displayGame(line1, line2, line3, line4)

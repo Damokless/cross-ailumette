@@ -12,11 +12,11 @@
         <h1>Welcome to AILumette </h1>
         <h2>Fill in the line and match fields </h2>
     </div>
-    <script>
+    <script type="text/javascript" src="./components.js">
         displayGame()
     </script>
     <input class="inputroman text-black w-36 h-10 shadow-md rounded border-transparent p-5 m-2" type="number" min="1" max="4" id="line" name="line" placeholder="line">
     <input class="inputroman text-black w-36 h-10 shadow-md rounded border-transparent p-5 m-2" type="number" min="1" max="7" id="match" name="match" placeholder="match">
-    <button class="mx-2 px-5 py-3 focus:outline-none focus:ring-0 shadow-md border-solid rounded-lg hover:shadow-inner bg-white hover:bg-gray-100" type="submit" onclick="playerTurns(document.getElementById('line').value,document.getElementById('match').value)">Submit</button>
+    <button class="mx-2 px-5 py-3 focus:outline-none focus:ring-0 shadow-md border-solid rounded-lg hover:shadow-inner bg-white hover:bg-gray-100" type="submit" onclick="getValue(document.getElementById('line').value,document.getElementById('match').value)">Submit</button>
 </body>
 </html>
